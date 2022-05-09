@@ -1,281 +1,43 @@
-<<<<<<< HEAD
 import pandas as pd
-import numpy as np
 
-class DataFrameCleaning():
-  def __init__(self, df):
-    self.df = df.copy()
+from scripts import utils
 
+def run_cleaning():
 
-  def get_column_with_many_null(self):
-    '''
-    Return List of Columns which contain more than 30% of null values
-    '''
-    df_size = self.df.shape[0]
-    
-    columns_list = self.df.columns
-    bad_columns = []
-    
-    for column in columns_list:
-        null_per_column = self.df[column].isnull().sum()
-        percentage = round( (null_per_column / df_size) * 100 , 2)
+    print("Data Cleaning ....")
+
+    file_name = 'data/Week1_challenge_data_source.csv'
+
+    df = pd.read_csv(file_name, na_values=['?','Na','NaN', 'undefined', None])
+
+    df_initial_shape = f'Data Frame Contains {df.shape[0]} rows and {df.shape[1]} columns'
+    null_percentage_in_df = utils.null_percentage(df)
+
+    # Clean up Began
+    df.dropna(subset=['Bearer Id', 'MSISDN/Number'], inplace=True)
+
+    # drop columns with more than 30% null Values
+    df_clean = utils.drop_column_with_many_null(df)
+
+    columns_object_type = ['Start', 'End', 'Last Location Name', 'Handset Manufacturer', 'Handset Type']
+
+    for column in columns_object_type:
+        mode = df_clean[column].mode()[0]
+        df_clean[column] = df_clean[column].fillna(mode)
+
+    ## i could get away by filling them all with Median
+    # they should be filled with median, but lots of columns to fill
+    for column in df_clean.columns:
+        # if column have null value fill 
+        if(df[column].isnull().sum() > 0):
+            mode = df_clean[column].mode()[0]
+            df_clean[column] = df_clean[column].fillna(mode)
+
+    null_percentage_after_clean = utils.null_percentage(df_clean)
+
+    ### save the cleaned data
+    for_save_df = df_clean.set_index('Bearer Id')
+    for_save_df.to_csv('data/clean_telco.csv')
+    print("Data Frame cleand an Saved!")
+    return (df_initial_shape,  null_percentage_in_df, null_percentage_after_clean)
         
-        if(percentage > 30):
-            bad_columns.append(column)
-    
-    return bad_columns
-
-  
-  def drop_columns(self, columns):
-    '''
-    Return Dataframe with Most null columns removed.
-    '''
-
-    self.df.drop(columns, axis=1, inplace=True)
-
-
-  def drop_column(self, column):
-    '''
-    Drop un-wanted columns
-    '''
-    self.drop_columns(column)
-
-
-  def drop_rows(self, columns):
-    '''
-    Drop Rows of specified columns, which contain null values
-    apply it on columns with small number of nulls
-    '''
-    self.df.dropna(subset=columns, inplace=True)
-
-
-  def convert_datetime(self, columns):
-    '''
-    Convert columns to date time.
-    '''
-
-    for column in columns:
-      self.df[column] = pd.to_datetime(self.df[column])
-    
-    return self.df
-
-
-  def convert_to(self, columns, data_type):
-    '''
-    Convert Columns to desired data types.
-    '''
-
-    for column in columns:
-      self.df[column] = self.df[column].astype(data_type)
-    
-    return self.df
-
-
-  def fill_catagorical_column(self, column):
-    '''
-    Return DataFrame
-    Fill Null Value of catagorical columns with Mode
-    '''
-
-    mode = self.df[column].mode()[0]
-    self.df[column] = self.df[column].fillna(mode)
-
-
-  def fill_catagorical_columns(self, columns):
-    '''
-    Fill Null values of multiple columns with Mode.
-    '''
-    for column in columns:
-      self.fill_catagorical_column(column)
-  
-
-  def fill_numerical_column(self, column):
-    '''
-    Reuturn DataFrame with Numerical null values filled with 
-    mean or median depending on the skewness of the column
-    '''
-
-    skewness = self.df[column].skew()
-    if((-1 < skewness) and (skewness < -0.5)):
-      # Negative skew
-      self.df[column].fillna(self.df[column].mean())
-
-    elif((0.5 < skewness) and (skewness < 1)):
-      # Positive skew
-      self.df[column].fillna(self.df[column].median())
-
-    else:
-      # highly skewed 
-      self.df[column].fillna(self.df[column].median())
-
-
-  def fill_numerical_columns(self, columns):
-    '''
-    Fill Numerical multiple numerical columns with median and mode
-    depending on their skewness.
-    '''
-    for column in columns:
-      self.fill_numerical_column(column)
-
-
-  def fix_outliers(self, col):
-    '''
-    Handle outliers of specified column
-    '''
-    q1 = self.df[col].quantile(0.25)
-    q3 = self.df[col].quantile(0.75)
-
-    lower_bound = q1 - ((1.5) * (q3 - q1))
-    upper_bound = q3 + ((1.5) * (q3 - q1))
-
-    self.df[col] = np.where(self.df[col] < lower_bound, lower_bound, self.df[col])
-    self.df[col] = np.where(self.df[col] > upper_bound, upper_bound, self.df[col])
-
-
-  def save_clean(self):
-    try:
-      self.df.to_csv('data/clean_telecom_data.csv', index=True)
-      print('The data is cleaned Succesfully')
-    except:
-      print('Log: Error while Saving File')
-=======
-import pandas as pd
-import numpy as np
-
-class DataFrameCleaning():
-  def __init__(self, df):
-    self.df = df.copy()
-
-
-  def get_column_with_many_null(self):
-    '''
-    Return List of Columns which contain more than 30% of null values
-    '''
-    df_size = self.df.shape[0]
-    
-    columns_list = self.df.columns
-    bad_columns = []
-    
-    for column in columns_list:
-        null_per_column = self.df[column].isnull().sum()
-        percentage = round( (null_per_column / df_size) * 100 , 2)
-        
-        if(percentage > 30):
-            bad_columns.append(column)
-    
-    return bad_columns
-
-  
-  def drop_columns(self, columns):
-    '''
-    Return Dataframe with Most null columns removed.
-    '''
-
-    self.df.drop(columns, axis=1, inplace=True)
-
-
-  def drop_column(self, column):
-    '''
-    Drop un-wanted columns
-    '''
-    self.drop_columns(column)
-
-
-  def drop_rows(self, columns):
-    '''
-    Drop Rows of specified columns, which contain null values
-    apply it on columns with small number of nulls
-    '''
-    self.df.dropna(subset=columns, inplace=True)
-
-
-  def convert_datetime(self, columns):
-    '''
-    Convert columns to date time.
-    '''
-
-    for column in columns:
-      self.df[column] = pd.to_datetime(self.df[column])
-    
-    return self.df
-
-
-  def convert_to(self, columns, data_type):
-    '''
-    Convert Columns to desired data types.
-    '''
-
-    for column in columns:
-      self.df[column] = self.df[column].astype(data_type)
-    
-    return self.df
-
-
-  def fill_catagorical_column(self, column):
-    '''
-    Return DataFrame
-    Fill Null Value of catagorical columns with Mode
-    '''
-
-    mode = self.df[column].mode()[0]
-    self.df[column] = self.df[column].fillna(mode)
-
-
-  def fill_catagorical_columns(self, columns):
-    '''
-    Fill Null values of multiple columns with Mode.
-    '''
-    for column in columns:
-      self.fill_catagorical_column(column)
-  
-
-  def fill_numerical_column(self, column):
-    '''
-    Reuturn DataFrame with Numerical null values filled with 
-    mean or median depending on the skewness of the column
-    '''
-
-    skewness = self.df[column].skew()
-    if((-1 < skewness) and (skewness < -0.5)):
-      # Negative skew
-      self.df[column].fillna(self.df[column].mean())
-
-    elif((0.5 < skewness) and (skewness < 1)):
-      # Positive skew
-      self.df[column].fillna(self.df[column].median())
-
-    else:
-      # highly skewed 
-      self.df[column].fillna(self.df[column].median())
-
-
-  def fill_numerical_columns(self, columns):
-    '''
-    Fill Numerical multiple numerical columns with median and mode
-    depending on their skewness.
-    '''
-    for column in columns:
-      self.fill_numerical_column(column)
-
-
-  def fix_outliers(self, col):
-    '''
-    Handle outliers of specified column
-    '''
-    q1 = self.df[col].quantile(0.25)
-    q3 = self.df[col].quantile(0.75)
-
-    lower_bound = q1 - ((1.5) * (q3 - q1))
-    upper_bound = q3 + ((1.5) * (q3 - q1))
-
-    self.df[col] = np.where(self.df[col] < lower_bound, lower_bound, self.df[col])
-    self.df[col] = np.where(self.df[col] > upper_bound, upper_bound, self.df[col])
-
-
-  def save_clean(self):
-    try:
-      self.df.to_csv('data/clean_telecom_data.csv', index=True)
-      print('The data is cleaned Succesfully')
-    except:
-      print('Log: Error while Saving File')
->>>>>>> 84cbf52 (updates)

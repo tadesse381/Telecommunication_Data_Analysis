@@ -1,139 +1,138 @@
-<<<<<<< HEAD
 import pandas as pd
+import numpy as np
 
-class DataFrameInfo():
+class DataFrameCleaning():
   def __init__(self, df):
     self.df = df.copy()
 
 
-  def info(self):
+  def get_column_with_many_null(self):
     '''
-    Display number of rows and columns in the Data frame
+    Return List of Columns which contain more than 30% of null values
     '''
-
-    print(f"Data Frame contain {self.df.shape[0]} rows and {self.df.shape[1]} columns")
-
-
-  def detail_info(self):
-    '''
-    Display detail Dataframe info
-    '''
-
-    print(self.df.info())
-
-
-  def skewness(self):
-    '''
-    Display The skew value of each column.
-    skewness b/n -0.5 - 0.5 : good
-    skewness b/n -1 - -0.5  : negative skew
-    skewness b/n 0.5 - 1    : positive skew
-    other values: are highly skewed
-    '''
-    print(self.df.skew())
-
-
-  def describe(self):
-    '''
-    Display Numerical Description of the Dataframe
-    '''
-    print(self.df.describe())  
-
-
-  def null_percentage(self):
-    '''
-    Display Total Null percentage of the Data Frame
-    '''
-
-    number_of_rows, number_of_columns = self.df.shape
-    df_size = number_of_rows * number_of_columns
+    df_size = self.df.shape[0]
     
-    null_size = (self.df.isnull().sum()).sum()
-    percentage = round((null_size / df_size) * 100, 2)
-    print(f"Data Frame contain null values of { percentage }%")
-
-
-  def get_columns_list(self):
-    '''
-    Return Column list of the Dataframe
-    '''
-    return self.df.columns.to_list()
-
-
-  def get_null_counts(self):
-    '''
-    Display Null Counts of each column
-    '''
-
-    print(self.df.isnull().sum())
-
-=======
-import pandas as pd
-
-class DataFrameInfo():
-  def __init__(self, df):
-    self.df = df.copy()
-
-
-  def info(self):
-    '''
-    Display number of rows and columns in the Data frame
-    '''
-
-    print(f"Data Frame contain {self.df.shape[0]} rows and {self.df.shape[1]} columns")
-
-
-  def detail_info(self):
-    '''
-    Display detail Dataframe info
-    '''
-
-    print(self.df.info())
-
-
-  def skewness(self):
-    '''
-    Display The skew value of each column.
-    skewness b/n -0.5 - 0.5 : good
-    skewness b/n -1 - -0.5  : negative skew
-    skewness b/n 0.5 - 1    : positive skew
-    other values: are highly skewed
-    '''
-    print(self.df.skew())
-
-
-  def describe(self):
-    '''
-    Display Numerical Description of the Dataframe
-    '''
-    print(self.df.describe())  
-
-
-  def null_percentage(self):
-    '''
-    Display Total Null percentage of the Data Frame
-    '''
-
-    number_of_rows, number_of_columns = self.df.shape
-    df_size = number_of_rows * number_of_columns
+    columns_list = self.df.columns
+    bad_columns = []
     
-    null_size = (self.df.isnull().sum()).sum()
-    percentage = round((null_size / df_size) * 100, 2)
-    print(f"Data Frame contain null values of { percentage }%")
+    for column in columns_list:
+        null_per_column = self.df[column].isnull().sum()
+        percentage = round( (null_per_column / df_size) * 100 , 2)
+        
+        if(percentage > 30):
+            bad_columns.append(column)
+    
+    return bad_columns
 
-
-  def get_columns_list(self):
+  
+  def drop_columns(self, columns):
     '''
-    Return Column list of the Dataframe
-    '''
-    return self.df.columns.to_list()
-
-
-  def get_null_counts(self):
-    '''
-    Display Null Counts of each column
+    Return Dataframe with Most null columns removed.
     '''
 
-    print(self.df.isnull().sum())
+    self.df.drop(columns, axis=1, inplace=True)
 
->>>>>>> 84cbf52 (updates)
+
+  def drop_column(self, column):
+    '''
+    Drop un-wanted columns
+    '''
+    self.drop_columns(column)
+
+
+  def drop_rows(self, columns):
+    '''
+    Drop Rows of specified columns, which contain null values
+    apply it on columns with small number of nulls
+    '''
+    self.df.dropna(subset=columns, inplace=True)
+
+
+  def convert_datetime(self, columns):
+    '''
+    Convert columns to date time.
+    '''
+
+    for column in columns:
+      self.df[column] = pd.to_datetime(self.df[column])
+    
+    return self.df
+
+
+  def convert_to(self, columns, data_type):
+    '''
+    Convert Columns to desired data types.
+    '''
+
+    for column in columns:
+      self.df[column] = self.df[column].astype(data_type)
+    
+    return self.df
+
+
+  def fill_catagorical_column(self, column):
+    '''
+    Return DataFrame
+    Fill Null Value of catagorical columns with Mode
+    '''
+
+    mode = self.df[column].mode()[0]
+    self.df[column] = self.df[column].fillna(mode)
+
+
+  def fill_catagorical_columns(self, columns):
+    '''
+    Fill Null values of multiple columns with Mode.
+    '''
+    for column in columns:
+      self.fill_catagorical_column(column)
+  
+
+  def fill_numerical_column(self, column):
+    '''
+    Reuturn DataFrame with Numerical null values filled with 
+    mean or median depending on the skewness of the column
+    '''
+
+    skewness = self.df[column].skew()
+    if((-1 < skewness) and (skewness < -0.5)):
+      # Negative skew
+      self.df[column].fillna(self.df[column].mean())
+
+    elif((0.5 < skewness) and (skewness < 1)):
+      # Positive skew
+      self.df[column].fillna(self.df[column].median())
+
+    else:
+      # highly skewed 
+      self.df[column].fillna(self.df[column].median())
+
+
+  def fill_numerical_columns(self, columns):
+    '''
+    Fill Numerical multiple numerical columns with median and mode
+    depending on their skewness.
+    '''
+    for column in columns:
+      self.fill_numerical_column(column)
+
+
+  def fix_outliers(self, col):
+    '''
+    Handle outliers of specified column
+    '''
+    q1 = self.df[col].quantile(0.25)
+    q3 = self.df[col].quantile(0.75)
+
+    lower_bound = q1 - ((1.5) * (q3 - q1))
+    upper_bound = q3 + ((1.5) * (q3 - q1))
+
+    self.df[col] = np.where(self.df[col] < lower_bound, lower_bound, self.df[col])
+    self.df[col] = np.where(self.df[col] > upper_bound, upper_bound, self.df[col])
+
+
+  def save_clean(self):
+    try:
+      self.df.to_csv('../data/clean_telecom_data.csv', index=False)
+    except:
+      print('Log: Error while Saving File')
