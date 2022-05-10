@@ -106,17 +106,6 @@ class DataFrameCleaning():
     else:
       # highly skewed 
       self.df[column].fillna(self.df[column].median())
-
-
-  def fill_numerical_columns(self, columns):
-    '''
-    Fill Numerical multiple numerical columns with median and mode
-    depending on their skewness.
-    '''
-    for column in columns:
-      self.fill_numerical_column(column)
-
-
   def fix_outliers(self, col):
     '''
     Handle outliers of specified column
@@ -129,7 +118,6 @@ class DataFrameCleaning():
 
     self.df[col] = np.where(self.df[col] < lower_bound, lower_bound, self.df[col])
     self.df[col] = np.where(self.df[col] > upper_bound, upper_bound, self.df[col])
-
 
   def save_clean(self):
     try:
