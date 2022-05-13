@@ -62,14 +62,13 @@ def bivariant(user_behaviour):
 
 def univriant(user_df):
   fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8)) = plt.subplots(2, 4,figsize=(15,8))
-  def univriant_sactter(df, x_col, y_col, ax):
-    sns.displot(data = df, x=x_col, y=y_col, ax=ax)
 
   user_df = user_df.sample(1000)
   sns.displot(data=user_df, x="Total Google", color="Green", ax=ax1)
   sns.displot(data=user_df, x="Total Youtube", color="Green", ax=ax2)
 
   ax1.hist(user_df['Total Google'])
+  sns.displot(data=user_df, x='Total Google', color="red", kde=True, ax=ax7)
   ax1.set_title("Total Google")
   
   ax2.hist(user_df['Total Youtube'])
@@ -88,11 +87,11 @@ def univriant(user_df):
   ax6.set_title("Total Social Media")
 
   ax7.hist(user_df['Total Email'])
-  univriant_sactter(user_df, 'Total','Total Email', ax7)
+  sns.displot(data=user_df, x='Total Email', color="green", kde=True, ax=ax7)
   ax7.set_title("Total Netflix")
 
   ax8.hist(user_df['Total Other'])
-  univriant_sactter(user_df, 'Total', 'Total Other',ax8)
+  sns.displot(data=user_df, x='Total Email', color="green", kde=True, ax=ax7)
   ax8.set_title("Total Other")
   st.pyplot()
 def app_engagement(user_df):
