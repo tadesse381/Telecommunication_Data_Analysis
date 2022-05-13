@@ -90,6 +90,7 @@ def univriant(user_df):
   ax7.set_title("Total Netflix")
 
   ax8.hist(user_df['Total Other'])
+  sns.displot(data=user_df, x='Total Other', color="blue", kde=True, ax=ax8)
   ax8.set_title("Total Other")
   st.pyplot()
 def app_engagement(user_df):
