@@ -27,7 +27,7 @@ def run_marketing():
       result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
       print(f"**** { column } ***")
       print(result)
-      result.plot(kind='pie', labels=result['Handset Type'], y='hh', legend=None, autopct='%.2f%%', title='top 5over top ten')
+      result.plot(kind='pie', labels=result['Handset Manufacturer'], y='hh', legend=None, autopct='%.2f%%', title='top 5over top ten')
       plt.tight_layout()
       plt.show()
   st.write("## Analysis Insight")
