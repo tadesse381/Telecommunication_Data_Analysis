@@ -15,7 +15,7 @@ def run_marketing():
   top_10_handset = df_clean.groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(10)
   top_3_manufacturers = df_clean.groupby("Handset Manufacturer")['MSISDN/Number'].nunique().nlargest(3)
 
-  fig, (ax1, ax2,ax3) = plt.subplots(1, 2,3,figsize=(12,7))
+  fig, (ax1, ax2,ax3) = plt.subplots(1, 2,figsize=(12,7))
   plot.serious_bar(top_3_manufacturers, ax1)
   plot.serious_bar(top_10_handset, ax2)
   plt.xticks(rotation=75)
