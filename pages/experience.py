@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scripts.ploting as plot
 import scripts.utils as utils
+# My Custom Modules Importing
+from scripts import file
 def null_percentage(df):
     number_of_rows, number_of_columns = df.shape
     df_size = number_of_rows * number_of_columns
