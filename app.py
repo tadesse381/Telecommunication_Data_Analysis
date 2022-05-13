@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-
+from streamlit_option_menu import option_menu
 # pages
 import pages.intro as intro
 import pages.marketing as marketing
