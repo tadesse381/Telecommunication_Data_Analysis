@@ -23,11 +23,11 @@ def run_marketing():
   top_manufacturers = df_clean.groupby("Handset Manufacturer").agg({"MSISDN/Number":'count'}).reset_index()
   top_3_manufacturers = top_manufacturers.sort_values(by='MSISDN/Number', ascending=False).head(3)
   manufacturers = df_clean.groupby("Handset Manufacturer")
+  st.write("The top 5 handsets per top 3 handset manufacturer")
   for column in top_3_manufacturers['Handset Manufacturer']:
       result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
       print(f"**** { column } ***")
       print(result)
-      st.write("The top 5 handsets per top 3 handset manufacturer")
       st.write(result.head())
   st.write("## Analysis Insight")
   st.write("From The above two graphes, the Most sold phone rancking number 1 is Huawei B528S-23A \
