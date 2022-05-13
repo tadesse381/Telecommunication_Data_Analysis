@@ -13,7 +13,7 @@ def null_percentage(df):
     null_size = (df.isnull().sum()).sum()
     percentage = round((null_size / df_size) * 100, 2)
     print(f"Data Fraame contain null values of { percentage }%")
-def run_experience():
+def run_experiance():
   #Read the cleaned csv file and store it on data
   file_name = 'Week1_challenge_data_source.csv'
   df_task_3=pd.read_csv(f'../data/{file_name}', na_values=null_values)
