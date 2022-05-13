@@ -61,14 +61,14 @@ def bivariant(user_behaviour):
   st.pyplot()
 
 def univriant(user_df):
-  fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8)) = plt.subplots(2, 4,figsize=(15,8))
+  fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8)) = plt.subplots(2, 10,figsize=(15,8))
 
   user_df = user_df.sample(1000)
   sns.displot(data=user_df, x="Total Google", color="Green", ax=ax1)
   sns.displot(data=user_df, x="Total Youtube", color="Green", ax=ax2)
 
   ax1.hist(user_df['Total Google'])
-  sns.displot(data=user_df, x='Total Google', color="red", kde=True, ax=ax7)
+  sns.displot(data=user_df, x='Total Google', color="red", kde=True, ax=ax1)
   ax1.set_title("Total Google")
   
   ax2.hist(user_df['Total Youtube'])
