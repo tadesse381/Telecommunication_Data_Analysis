@@ -115,6 +115,7 @@ def run_engagement():
   st.write("## User Engagement Analysis")
   user_df = get_user_related_columns(df_clean)
   st.write(user_df.head())
+  st.ploting.hist(user_df, 'Total Google', 'green')
   
   st.write("### Relation Ship Per applicaton")
   
@@ -131,6 +132,3 @@ def run_engagement():
   st.write("## From The graph we can see Users are Engaged on Gaming, Other ,Youtube and Netflix more than other applications")
   st.write("So The We should give more focus on Gaming Than other apps")
   st.pyplot()
-  column_for_analysis = ['Bearer Id','Dur. (ms).1' ,'MSISDN/Number','Total Google', 'Total Youtube','Total Netflix', 'Total Email', 'Total Gaming', 'Total Social Media', 'Total Other', 'Total']
-  user_app_behaviour = df_clean[column_for_analysis]
-  st.ploting.hist(user_app_behaviour, 'Total Google', 'green')
