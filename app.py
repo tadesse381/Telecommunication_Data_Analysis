@@ -9,13 +9,14 @@ import pages.engagement as enngagement
 import pages.experiance as experiance
 import pages.satisfaction as satisfaction
 
-st.set_page_config(page_title="Day 5", layout="wide")
+st.set_page_config(page_title="TelCo Data Analysis", layout="wide")
 st.title("TelCo Data analysis")
-st.sidebar.markdown("# Side Bar")
+st.sidebar.markdown("# TellCo Data Analysis")
 
 
-page = st.sidebar.selectbox('Choose Page', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'])
-
+#page = st.sidebar.selectbox('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'])
+page = st.sidebar.selectbox('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
+                            icons=['house', 'gear','house', 'gear','house'], menu_icon="cast", default_index=1)
 if(page == 'Intro'):
   intro.run()
 elif(page == 'Marketing'):
