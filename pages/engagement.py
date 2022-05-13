@@ -91,8 +91,7 @@ def univriant(user_df):
 
   ax8.hist(user_df['Total Other'])
   ax8.set_title("Total Other")
-  
-
+  st.pyplot()
 def app_engagement(user_df):
   fix, ax = plt.subplots(1, 1, figsize=(12,7))
   engagement = user_df.copy()
