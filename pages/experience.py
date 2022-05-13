@@ -70,7 +70,33 @@ def run_experiance():
   df_task2 = df_task2.groupby('MSISDN/Number')\
              .agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
   df_task2.head()
-  # new_netwok_df["Handset Type"] = [catagory[x] for x in new_netwok_df["Handset Type"]]
+  # new_netwok_df["Handset Type"] = [catagory[x] for x in new_netwok_df["Handset Type"]
+  ### so Number 3 is the optimum, and we should run with 3 cluster
+  min_max_scaler = preprocessing.MinMaxScaler()
+  df_values = df_task2.values
+  scalled_values = min_max_scaler.fit_transform(df_values)
+  df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
+  kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  min_max_scaler = preprocessing.MinMaxScaler()
+  df_values = df_task2.values
+  scalled_values = min_max_scaler.fit_transform(df_values)
+  df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
+  kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  cluster = kmeans.predict(df_normalized)
+  engagement_df = df_task2.copy()
+  engagement_df['cluster-engagement']  = cluster
+  distortions = []
+  K = range(1,10)
+  for k in K:
+      kmeanModel = KMeans(n_clusters=k)
+      kmeanModel.fit(df_normalized)
+      distortions.append(kmeanModel.inertia_)
+  kmeans = KMeans(n_clusters=3)
+  kmeans.fit(df_normalized)
+  cluster = kmeans.predict(df_normalized)
+  cluster_df = df_task2.copy()
+  cluster_df['cluster']  = cluster
+  cluster_df['cluster']
   ## First normalize the Data, Then Cluster
   min_max_scaler = preprocessing.MinMaxScaler()
   network_values = net_cluster_df.values
