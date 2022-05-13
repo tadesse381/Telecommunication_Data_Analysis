@@ -16,8 +16,8 @@ st.sidebar.markdown("# TellCo Data Analysis")
 
 #page = st.sidebar.selectbox('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'])
 with st.sidebar:
-  page = option_menu('TellCo Home', ['Home', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
-                            icons=['house', 'bi-currency-exchange','house', 'gear','house'], menu_icon="cast", default_index=1)
+  page = option_menu('TellCo Home', ['Home', 'Marketing', 'Engagement', 'Experience', 'Satisfaction'],
+                            icons=['house', 'bi-currency-exchange','bi-cloud-check-fill', 'bi-briefcase-fil','bi-check-square-fill'], menu_icon="cast", default_index=1)
   page
 if(page == 'Home'):
   home.run()
@@ -25,7 +25,7 @@ elif(page == 'Marketing'):
   marketing.run_marketing()
 elif(page == 'Engagement'):
   enngagement.run_engagement()
-elif(page == 'Experiance'):
+elif(page == 'Experience'):
   experiance.run_experiance()
 elif(page == 'Satisfaction'):
   satisfaction.run_satisfaction()
