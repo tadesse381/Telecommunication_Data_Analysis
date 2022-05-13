@@ -20,6 +20,7 @@ def run_marketing():
   plot.serious_bar(top_10_handset, ax2)
   plt.xticks(rotation=75)
   st.pyplot()
+  manufacturers = df_clean.groupby("Handset Manufacturer")
   for column in top_3_manufacturers['Handset Manufacturer']:
       result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
       print(f"**** { column } ***")
