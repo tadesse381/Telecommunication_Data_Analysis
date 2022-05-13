@@ -108,7 +108,7 @@ def run_experiance():
   experiance_df['cluster-experiance']  = cluster
   experiance_df = experiance_df.set_index('MSISDN/Number')
   experiance_df.head()
-  plot_scatter(experiance_df,"Total Throughput", "Total RTT","Clustering with Kmean", "cluster-experiance", "")
+  #plot_scatter(experiance_df,"Total Throughput", "Total RTT","Clustering with Kmean", "cluster-experiance", "")
   experiance_df['cluster-experiance'].value_counts()
   ## dont' know what kind of description am gonna provide for this 
   st.write("## User Experiance Analysis")
