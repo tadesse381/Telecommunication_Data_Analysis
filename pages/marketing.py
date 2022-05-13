@@ -20,7 +20,11 @@ def run_marketing():
   plot.serious_bar(top_10_handset, ax2)
   plt.xticks(rotation=75)
   st.pyplot()
-
+  for column in top_3_manufacturers['Handset Manufacturer']:
+      result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
+      print(f"**** { column } ***")
+      print(result)
+      print()
   st.write("## Analysis Insight")
   st.write("From The above two graphes, the Most sold phone rancking number 1 is Huawei B528S-23A \
     And The Number one Manufacturer is Apple. So, when we look at the handset next to Huawei most of them are \
