@@ -4,6 +4,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scripts.ploting as plot
 import scripts.utils as utils
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn import preprocessing
+from sklearn.cluster import KMeans
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+import pickle
 # My Custom Modules Importing
 from scripts import file
 def null_percentage(df):
