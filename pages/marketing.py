@@ -26,7 +26,7 @@ def run_marketing():
   st.write("The top 5 handsets per top 3 handset manufacturer")
   for column in top_3_manufacturers['Handset Manufacturer']:
       result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
-       st.write(f"**** { column } ***")
+      st.write(f"**** { column } ***")
       print(result)
       st.write(result.head())
   st.write("## Analysis Insight")
