@@ -67,7 +67,9 @@ def run_experiance():
   net_cluster_df.head()
   df_task2 = df_clean.copy()
   df_task2['Total'] = df_task2['Total UL (Bytes)'] + df_task2['Total DL (Bytes)']
-  df_task2 = df_task2.groupby('MSISDN/Number')\.agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
+  df_task2 = df_task2.groupby('MSISDN/Number')\
+             .agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
+  df_task2.head()
   # new_netwok_df["Handset Type"] = [catagory[x] for x in new_netwok_df["Handset Type"]]
   ## First normalize the Data, Then Cluster
   min_max_scaler = preprocessing.MinMaxScaler()
