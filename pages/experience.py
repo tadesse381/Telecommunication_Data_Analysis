@@ -15,7 +15,7 @@ def null_percentage(df):
     print(f"Data Fraame contain null values of { percentage }%")
 def run_experiance():
   #Read the cleaned csv file and store it on data
-  df_task_3=pd.read_csv(f'../data/Week1_challenge_data_source.csv')
+  df_task_3=pd.read_csv('../data/Week1_challenge_data_source.csv')
 
   
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
