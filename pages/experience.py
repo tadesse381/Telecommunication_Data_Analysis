@@ -16,7 +16,9 @@ def null_percentage(df):
 def run_experience():
   #Read the cleaned csv file and store it on data
   file_name = 'Week1_challenge_data_source.csv'
-  df_task_3 = file.read_csv(file_name)
+  df_task_3=pd.read_csv(f'../data/{file_name}', na_values=null_values)
+
+  
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
                          'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
