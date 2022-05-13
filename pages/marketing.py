@@ -21,7 +21,7 @@ def run_marketing():
   plt.xticks(rotation=75)
   st.pyplot()
   top_manufacturers = df_clean.groupby("Handset Manufacturer").agg({"MSISDN/Number":'count'}).reset_index()
-  top_3_manufacturers = top_manufacturers.sort_values(by='MSISDN/Number', ascending=False).head(top)
+  top_3_manufacturers = top_manufacturers.sort_values(by='MSISDN/Number', ascending=False).head(3)
   manufacturers = df_clean.groupby("Handset Manufacturer")
   for column in top_3_manufacturers['Handset Manufacturer']:
       result = manufacturers.get_group(column).groupby("Handset Type")['MSISDN/Number'].nunique().nlargest(5)
