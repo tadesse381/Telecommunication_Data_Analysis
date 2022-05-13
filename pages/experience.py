@@ -25,7 +25,13 @@ def run_experiance():
   #Read the cleaned csv file and store it on data
   file_name = 'data/Week1_challenge_data_source.csv'
   df_task_3 = pd.read_csv(file_name)
-  
+  #Read the cleaned csv file and store it on data
+  file_name1 = 'data/clean_telecommunication_data.csv'
+  data =  pd.read_csv(file_name1)
+  df_clean = data.copy()
+  aggregate = {"Bearer Id": 'count', 'Dur. (ms).1':'sum', 'Total UL (Bytes)': 'sum', 'Total DL (Bytes)': 'sum'}
+  aggregation_result = df_clean.groupby('MSISDN/Number').agg(aggregate)
+  ggregation_result.head()
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
                          'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
@@ -59,11 +65,9 @@ def run_experiance():
   net_cluster_df.drop('Handset Type', axis=1, inplace=True)
   net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
   net_cluster_df.head()
-  df_task2 = df_task_3.copy()
+  df_task2 = df_clean.copy()
   df_task2['Total'] = df_task2['Total UL (Bytes)'] + df_task2['Total DL (Bytes)']
   df_task2 = df_task2.groupby('MSISDN/Number')\.agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
-
-df_task2.head()
   # new_netwok_df["Handset Type"] = [catagory[x] for x in new_netwok_df["Handset Type"]]
   ## First normalize the Data, Then Cluster
   min_max_scaler = preprocessing.MinMaxScaler()
