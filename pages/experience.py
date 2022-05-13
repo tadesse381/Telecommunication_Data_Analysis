@@ -31,7 +31,7 @@ def run_experiance():
   df_clean = data.copy()
   aggregate = {"Bearer Id": 'count', 'Dur. (ms).1':'sum', 'Total UL (Bytes)': 'sum', 'Total DL (Bytes)': 'sum'}
   aggregation_result = df_clean.groupby('MSISDN/Number').agg(aggregate)
-  ggregation_result.head()
+  aggregation_result.head()
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
                          'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
