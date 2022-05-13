@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 # pages
-import pages.intro as intro
+import pages.home as home
 import pages.marketing as marketing
 import pages.engagement as enngagement
 import pages.experiance as experiance
