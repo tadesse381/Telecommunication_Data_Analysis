@@ -16,11 +16,11 @@ st.sidebar.markdown("# TellCo Data Analysis")
 
 #page = st.sidebar.selectbox('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'])
 with st.sidebar:
-  page = option_menu('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
+  page = option_menu('TellCo Home', ['Home', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
                             icons=['house', 'gear','house', 'gear','house'], menu_icon="cast", default_index=1)
   page
-if(page == 'Intro'):
-  intro.run()
+if(page == 'Home'):
+  home.run()
 elif(page == 'Marketing'):
   marketing.run_marketing()
 elif(page == 'Engagement'):
@@ -30,4 +30,4 @@ elif(page == 'Experiance'):
 elif(page == 'Satisfaction'):
   satisfaction.run_satisfaction()
 else:
-  intro.run()
+  home.run()
