@@ -88,11 +88,11 @@ def univriant(user_df):
   ax6.set_title("Total Social Media")
 
   ax7.hist(user_df['Total Email'])
-  univriant_sactter(data=user_df, x='Total Email', color="green", kde=True, ax=ax7)
+  univriant_sactter(user_df, 'Total','Total Email', ax7)
   ax7.set_title("Total Netflix")
 
   ax8.hist(user_df['Total Other'])
-  univriant_sactter(data=user_df, x='Total Other', color="blue", kde=True, ax=ax8)
+  univriant_sactter(user_df, 'Total', 'Total Other',ax8)
   ax8.set_title("Total Other")
   st.pyplot()
 def app_engagement(user_df):
