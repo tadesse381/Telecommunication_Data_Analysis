@@ -35,7 +35,7 @@ def run_experiance():
   network_per_user_df.head()
   # top 5
   result = network_per_user_df.sort_values(by='Total TCP Retrans', ascending=False)[:100]
-  plot_bar(result, result['Handset Type'], result['Total TCP Retrans'], 'Highest Total TCP Retrans Handsets','','')
+  st.plot_bar(result, result['Handset Type'], result['Total TCP Retrans'], 'Highest Total TCP Retrans Handsets','','')
   # Bottom 5
   network_per_user_df.sort_values(by='Total TCP Retrans', ascending=True)[:5]
   # most frequent
