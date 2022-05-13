@@ -115,7 +115,7 @@ def run_engagement():
   st.write("## User Engagement Analysis")
   user_df = get_user_related_columns(df_clean)
   st.write(user_df.head())
-  st.ploting.hist(user_df, 'Total Google', 'green')
+  #st.ploting.hist(user_df, 'Total Google', 'green')
   
   st.write("### Relation Ship Per applicaton")
   
@@ -123,8 +123,8 @@ def run_engagement():
   st.write("## Bivariant")
   bivariant(user_df)
 
-  # st.write("## Univariant")
-  # univriant(user_df)
+  st.write("## Univariant")
+  univriant(user_df)
 
   st.write("App per Engagement ")
   app_engagement(user_df)
