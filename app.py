@@ -15,7 +15,7 @@ st.sidebar.markdown("# TellCo Data Analysis")
 
 
 #page = st.sidebar.selectbox('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'])
-page = option_menu('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
+page = st.sidebar.option_menu('TellCo Menu', ['Intro', 'Marketing', 'Engagement', 'Experiance', 'Satisfaction'],
                             icons=['house', 'gear','house', 'gear','house'], menu_icon="cast", default_index=1)
 if(page == 'Intro'):
   intro.run()
