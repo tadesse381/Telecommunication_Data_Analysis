@@ -16,8 +16,8 @@ def run_marketing():
   top_3_manufacturers = df_clean.groupby("Handset Manufacturer")['MSISDN/Number'].nunique().nlargest(3)
 
   fig, (ax1, ax2) = plt.subplots(1, 2,figsize=(12,7))
-
-  plot.serious_bar(top_3_manufacturers, ax1)
+  #plot.serious_bar(top_3_manufacturers, ax1)
+  plot.pareto_plot(top_3_manufacturers, x='Handset Manufacturer', y='MSISDN/Number', title='Top 3 handset manufacturers')
   plot.serious_bar(top_10_handset, ax2)
   plt.xticks(rotation=75)
   st.pyplot()
