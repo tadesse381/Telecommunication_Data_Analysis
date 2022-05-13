@@ -9,7 +9,7 @@ import pages.engagement as enngagement
 import pages.experiance as experiance
 import pages.satisfaction as satisfaction
 
-st.set_page_config(page_title="TelCo Data Analysis", layout="wide")
+st.set_page_config(page_title="TellCo Data Analysis", layout="wide")
 st.title("TelCo Data analysis")
 st.sidebar.markdown("# TellCo Data Analysis")
 
