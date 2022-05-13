@@ -108,6 +108,11 @@ def app_engagement(user_df):
   data_df.sort_values(by='counts', ascending=False)[:3]
   sns.barplot(data = data_df, x='Application', y='counts', ax=ax)
   plt.show()
+def plot_heatmap(df:pd.DataFrame, title:str, cbar=False)->None:
+  plt.figure(figsize=(12, 7))
+  sns.heatmap(df, annot=True, cmap='viridis', vmin=0, vmax=1, fmt='.2f', linewidths=.7, cbar=cbar )
+  plt.title(title, size=18, fontweight='bold')
+  plt.show()
 def run_engagement():
   file_name = 'data/clean_telecommunication_data.csv'
   df_clean = pd.read_csv(file_name)
@@ -118,7 +123,7 @@ def run_engagement():
   st.write(user_df.head())
   #st.ploting.hist(user_df, 'Total Google', 'green')
   correlation = user_df.corr()
-  st.plot_heatmap(correlation, 'Correlation B/n  Applications')
+  plot_heatmap(correlation, 'Correlation B/n  Applications')
   st.write("### Relation Ship Per applicaton")
   st.write("## Univariant")
   univriant(user_df)
