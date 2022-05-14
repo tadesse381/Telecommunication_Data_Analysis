@@ -7,7 +7,7 @@ import scripts.ploting as plot
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 def run_marketing():
-  st.write("## Marketing Analysis")
+  st.write("## User Overview or Marketing Analysis")
 
   file_name = 'data/clean_telecommunication_data.csv'
   df_clean = pd.read_csv(file_name)
@@ -29,8 +29,7 @@ def run_marketing():
       st.write(f"**** { column } ***")
       print(result)
       st.write(result.head())
-  st.write("## Analysis Insight")
-  st.write("From The above two graphes, the Most sold phone rancking number 1 is Huawei B528S-23A \
-    And The Number one Manufacturer is Apple. So, when we look at the handset next to Huawei most of them are \
-      Products of Apple. ")
-  st.write("## So this shows, The Marketing Team Need to focus on selling Apple Products")
+  st.write("## Analysis Results")
+  st.write("Graph a)  and b) shows that from the top 3 manufacturers of handset the Apple is leading , and the phone which sold on number one is Huawei B528S-23A .\
+           But next to Huawei most of the customers use Apple Handset.Since Apple is highly manufactured and it is also used next to Huawei, the marketing department of Telcco should sell the apple handsets in order to be productiveTherefore, the company will generate a good income from selling the Apple handset.")
+
