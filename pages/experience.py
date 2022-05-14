@@ -4,6 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import scripts.ploting as plot
 from scripts import file
+import seaborn as sns
 def null_percentage(df):
     number_of_rows, number_of_columns = df.shape
     df_size = number_of_rows * number_of_columns
