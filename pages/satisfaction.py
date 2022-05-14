@@ -29,6 +29,18 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  #Read the cleaned csv file and store it on data
+  file_name = 'Week1_challenge_data_source.csv'
+  df_task_3 = file.read_csv(file_name)
+  new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
+                         'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
+                         'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
+  null_percentage(new_netwok_df)
+  new_netwok_df.isnull().sum()
+  ## Fill Mising Values
+  for col in new_netwok_df.columns:
+    if(new_netwok_df[col].isnull().sum()):
+      new_netwok_df[col] = new_netwok_df[col].fillna(new_netwok_df[col].mode()[0])
   #---------
   new_netwok_df['Total TCP Retrans'] = new_netwok_df['TCP DL Retrans. Vol (Bytes)'] +\
                                        new_netwok_df['TCP UL Retrans. Vol (Bytes)']
