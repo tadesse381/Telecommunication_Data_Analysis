@@ -29,6 +29,11 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  cluster = kmeans.predict(df_network_normalized)
+  experiance_df = network_per_user_df.copy()
+  experiance_df['cluster-experiance']  = cluster
+  experiance_df = experiance_df.set_index('MSISDN/Number')
+  experiance_df.head()
   #Compute the minimum, maximum, average & total non- normalized metrics for each cluster.
   cluster = kmeans.predict(df_normalized)
   engagement_df = df_task2.copy()
