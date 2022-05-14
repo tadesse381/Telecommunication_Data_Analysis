@@ -4,18 +4,16 @@ import streamlit as st
 from scripts import utils, clean_data
 
 def run():
-  st.write("## Intorudction")
-  st.write("TellCo, an existing mobile service provider in the Republic of Pefkakia.\
-    The Data set is **month** of **aggregated data** on **xDR**.")
-      
-  st.write("The Goal of this project is to Give insight Wether To buy or \
-      Leave the Mobile Service Provider")
-
-  st.write("## The Analysis We cover are")
-  st.write("0. Marketing Insight")
-  st.write("1. Usert Enagagement analysis")
-  st.write("2. User Experiance analysis")
-  st.write("3. User Satisfaction analysis")
+  st.write("## Introduction")
+  st.write("This project is performed to analyse whether Tellco is worth buying and selling.\
+           To perform the project the data extracted from a month of aggregated data on xDR is used.\
+           In this work, data cleaning, transforming, exploration and analysis tasks are performed.\
+           Finally,user overview, engagement, experience and satisfaction analytics is done and the Telcco productivity is predicted")
+  st.write("## The following Analysis are performed")
+  st.write("1. Marketing Analysis")
+  st.write("2. User Enagagement Analysis")
+  st.write("3. User Experiance Analysis")
+  st.write("4. User Satisfaction Analysis")
   
 
   
