@@ -34,6 +34,11 @@ def run_satisfaction():
   ## Engagement Score
   lowest_engagement = engagement_df.groupby('cluster-engagement').get_group(0).mean()
   st.write(lowest_engagement)
+  handset= network_per_user_df['Handset Type'].unique()
+  net_cluster_df = network_per_user_df.copy()
+  net_cluster_df.drop('Handset Type', axis=1, inplace=True)
+  net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
+  net_cluster_df.head()
   def get_experiance_score(df, low):
     x = float(low['Total RTT'])
     y = float(low['Total TCP Retrans'])
