@@ -43,4 +43,4 @@ def run_satisfaction():
                               + (df['Total Throughput'] - z)**2 )**0.5
     return new_df
 experiance_scored_df = get_experiance_score(experiance_df, lowest_experiance)
-st.write(experiance_scored_df.head()
+st.write(experiance_scored_df.head())
