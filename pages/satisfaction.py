@@ -49,3 +49,15 @@ def run_satisfaction():
     return new_df
   engagement_scored_df = get_engagement_score(engagement_df, lowest_engagement)
   st.write(engagement_scored_df.head())
+  lowest_experiance = experiance_df.groupby('cluster-experiance').get_group(0).mean()
+  st.write(lowest_experiance)
+  def get_experiance_score(df, low):
+    x = float(low['Total RTT'])
+    y = float(low['Total TCP Retrans'])
+    z = float(low['Total Throughput'])
+    new_df = df.copy()
+    new_df['experience score'] = ((df['Total RTT'] - x)**2 + (df['Total TCP Retrans'] - y)**2 \
+                              + (df['Total Throughput'] - z)**2 )**0.5
+    return new_df
+  experiance_scored_df = get_experiance_score(experiance_df, lowest_experiance)
+  st.write(experiance_scored_df.head())
