@@ -23,6 +23,12 @@ def run_satisfaction():
   df_task2['Total'] = df_task2['Total UL (Bytes)'] + df_task2['Total DL (Bytes)']
   df_task2 = df_task2.groupby('MSISDN/Number')\
     .agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
+  #Normalize each engagement metric and run a k-means (k=3) to classify customers in three groups of engagement.
+  min_max_scaler = preprocessing.MinMaxScaler()
+  df_values = df_task2.values
+  scalled_values = min_max_scaler.fit_transform(df_values)
+  df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
+  kmeans = KMeans(n_clusters=3).fit(df_normalized)
   #Compute the minimum, maximum, average & total non- normalized metrics for each cluster.
   cluster = kmeans.predict(df_normalized)
   engagement_df = df_task2.copy()
