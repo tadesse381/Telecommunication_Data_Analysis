@@ -43,16 +43,16 @@ def run_satisfaction():
   for col in new_netwok_df.columns:
     if(new_netwok_df[col].isnull().sum()):
       new_netwok_df[col] = new_netwok_df[col].fillna(new_netwok_df[col].mode()[0])
+  net_cluster_df = network_per_user_df.copy()
+  net_cluster_df.drop('Handset Type', axis=1, inplace=True)
+  net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
+  net_cluster_df.head()
   new_netwok_df['Total TCP Retrans'] = new_netwok_df['TCP DL Retrans. Vol (Bytes)'] +\
                                        new_netwok_df['TCP UL Retrans. Vol (Bytes)']
   new_netwok_df['Total Throughput'] = new_netwok_df['Avg Bearer TP DL (kbps)'] +\
                                       new_netwok_df['Avg Bearer TP DL (kbps)']
   new_netwok_df['Total RTT'] = new_netwok_df['Avg RTT DL (ms)'] + new_netwok_df['Avg RTT UL (ms)']
   handset= network_per_user_df['Handset Type'].unique()
-  net_cluster_df = network_per_user_df.copy()
-  net_cluster_df.drop('Handset Type', axis=1, inplace=True)
-  net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
-  net_cluster_df.head()
   def get_experiance_score(df, low):
     x = float(low['Total RTT'])
     y = float(low['Total TCP Retrans'])
