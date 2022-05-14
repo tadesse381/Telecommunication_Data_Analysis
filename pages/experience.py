@@ -57,4 +57,8 @@ def run_experiance():
   st.write(handset_throughput.sort_values(by='Total Throughput', ascending=False).head(5))
   handset_rtt = network_per_user_df.groupby('Handset Type').agg({'Total RTT': 'sum'}).reset_index()
   st.write(handset_rtt.sort_values(by='Total RTT', ascending=False).head(5))
- 
+ handset= network_per_user_df['Handset Type'].unique()
+ net_cluster_df = network_per_user_df.copy()
+ net_cluster_df.drop('Handset Type', axis=1, inplace=True)
+ net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
+ st.write(net_cluster_df.head())
