@@ -9,9 +9,10 @@ def null_percentage(df):
     
     null_size = (df.isnull().sum()).sum()
     percentage = round((null_size / df_size) * 100, 2)
-    st.write(percentage)
+    st.write("Data Fraame contain null values of:",percentage)
 def run_experiance():
   #Read the csv file
+  st.write("## User Experiance Analysis")
   file_name = 'data/Week1_challenge_data_source.csv'
   df_task_3 = pd.read_csv(file_name)
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
@@ -19,5 +20,4 @@ def run_experiance():
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
   null_percentage(new_netwok_df)
   new_netwok_df.isnull().sum()
-  st.write("## User Experiance Analysis")
   
