@@ -24,7 +24,7 @@ def plot_bar(df:pd.DataFrame, x_col:str, y_col:str, title:str, xlabel:str, ylabe
   st.pyplot()
 def run_experiance():
   #Read the csv file
-  st.write("## User Experiance Analysis")
+  st.write("## User Experience Analysis")
   file_name = 'data/Week1_challenge_data_source.csv'
   df_task_3 = pd.read_csv(file_name)
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
@@ -62,3 +62,8 @@ def run_experiance():
   net_cluster_df.drop('Handset Type', axis=1, inplace=True)
   net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
   st.write(net_cluster_df.head())
+  st.write("Experience Analytics Results")
+  st.write("It is figured out on graph d) Huawei has high TCP Retrans and Apple is the second one.\
+While the total throughput of iApple handset is greater by 21kb when it is compared with Huawei.\
+In addition to this the average TCP trans of Apple is about 60,460 kbps and average TCP trans of Apple is about 16,996.00 kbps.\
+Having this information, I recommend the investor to sell the Apple handset to increase the profit of the telecom. ")
