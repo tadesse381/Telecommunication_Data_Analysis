@@ -26,4 +26,10 @@ def run_experiance():
       new_netwok_df[col] = new_netwok_df[col].fillna(new_netwok_df[col].mode()[0])
   null_percentage(new_netwok_df)
   new_netwok_df.isnull().sum()
+  new_netwok_df['Total TCP Retrans'] = new_netwok_df['TCP DL Retrans. Vol (Bytes)'] +\
+                                       new_netwok_df['TCP UL Retrans. Vol (Bytes)']
+  new_netwok_df['Total Throughput'] = new_netwok_df['Avg Bearer TP DL (kbps)'] +\
+                                      new_netwok_df['Avg Bearer TP DL (kbps)']
+  new_netwok_df['Total RTT'] = new_netwok_df['Avg RTT DL (ms)'] + new_netwok_df['Avg RTT UL (ms)']
+  st.write(new_netwok_df.head()
   
