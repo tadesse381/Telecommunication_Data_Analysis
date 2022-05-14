@@ -31,3 +31,6 @@ def run_satisfaction():
   cluster = kmeans.predict(df_normalized)
   engagement_df = df_task2.copy()
   engagement_df['cluster-engagement']  = cluster
+  ## Engagement Score
+  lowest_engagement = engagement_df.groupby('cluster-engagement').get_group(0).mean()
+  st.write(lowest_engagement)
