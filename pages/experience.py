@@ -10,7 +10,7 @@ def null_percentage(df):
     null_size = (df.isnull().sum()).sum()
     percentage = round((null_size / df_size) * 100, 2)
     st.write("Data Fraame contain null values of:",percentage)
-def run_experiance():
+def run_experience():
   #Read the csv file
   st.write("## User Experiance Analysis")
   file_name = 'data/Week1_challenge_data_source.csv'

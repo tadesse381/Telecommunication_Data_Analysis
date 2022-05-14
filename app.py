@@ -6,7 +6,7 @@ from streamlit_option_menu import option_menu
 import pages.home as home
 import pages.marketing as marketing
 import pages.engagement as enngagement
-import pages.experience as experiance
+import pages.experience as experience
 import pages.satisfaction as satisfaction
 
 st.set_page_config(page_title="TellCo Data Analysis", layout="wide")
