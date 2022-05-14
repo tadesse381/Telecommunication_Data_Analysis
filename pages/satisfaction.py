@@ -46,7 +46,9 @@ def run_satisfaction():
   net_cluster_df = network_per_user_df.copy()
   net_cluster_df.drop('Handset Type', axis=1, inplace=True)
   net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
-  net_cluster_df.head()
+  aggregate = {'Handset Type':'first','Total TCP Retrans':'sum', 'Total Throughput':'sum', 'Total RTT':'sum'}
+  columns = ['MSISDN/Number','Bearer Id','Handset Type', 'Total TCP Retrans', 'Total Throughput', 'Total RTT']
+  network_per_user_df = new_netwok_df.groupby('MSISDN/Number').agg(aggregate).reset_index()
   new_netwok_df['Total TCP Retrans'] = new_netwok_df['TCP DL Retrans. Vol (Bytes)'] +\
                                        new_netwok_df['TCP UL Retrans. Vol (Bytes)']
   new_netwok_df['Total Throughput'] = new_netwok_df['Avg Bearer TP DL (kbps)'] +\
