@@ -32,4 +32,8 @@ def run_experiance():
                                       new_netwok_df['Avg Bearer TP DL (kbps)']
   new_netwok_df['Total RTT'] = new_netwok_df['Avg RTT DL (ms)'] + new_netwok_df['Avg RTT UL (ms)']
   st.write(new_netwok_df.head())
+  aggregate = {'Handset Type':'first','Total TCP Retrans':'sum', 'Total Throughput':'sum', 'Total RTT':'sum'}
+  columns = ['MSISDN/Number','Bearer Id','Handset Type', 'Total TCP Retrans', 'Total Throughput', 'Total RTT']
+  network_per_user_df = new_netwok_df.groupby('MSISDN/Number').agg(aggregate).reset_index()
+  st.write(network_per_user_df.head())
   
