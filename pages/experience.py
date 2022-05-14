@@ -31,5 +31,5 @@ def run_experiance():
   new_netwok_df['Total Throughput'] = new_netwok_df['Avg Bearer TP DL (kbps)'] +\
                                       new_netwok_df['Avg Bearer TP DL (kbps)']
   new_netwok_df['Total RTT'] = new_netwok_df['Avg RTT DL (ms)'] + new_netwok_df['Avg RTT UL (ms)']
-  new_netwok_df.head()
+  st.write(new_netwok_df.head())
   
