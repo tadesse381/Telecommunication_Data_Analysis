@@ -29,6 +29,11 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  #---------
+  aggregate = {'Handset Type':'first','Total TCP Retrans':'sum', 'Total Throughput':'sum', 'Total RTT':'sum'}
+  columns = ['MSISDN/Number','Bearer Id','Handset Type', 'Total TCP Retrans', 'Total Throughput', 'Total RTT']
+  network_per_user_df = new_netwok_df.groupby('MSISDN/Number').agg(aggregate).reset_index()
+  network_per_user_df.head()
   handset= network_per_user_df['Handset Type'].unique()
   # catagory = {}
   # for index, each in enumerate(handset.tolist()):
