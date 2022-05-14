@@ -115,4 +115,19 @@ def run_satisfaction():
   satisfaction_df = pd.merge(engagement_scored_df["engagement score"], experiance_scored_df['experience score'], on='MSISDN/Number')
   satisfaction_df['satisfaction score'] = (satisfaction_df['engagement score'] + satisfaction_df['experience score']) / 2
   st.write(satisfaction_df.sort_values(by='satisfaction score', ascending=False).head(5))
+  #Task 4.3 - Build a regression model of your choice to predict the satisfaction score of a customer.
+  regretion_df = pd.merge(engagement_df[['Bearer Id', 'Dur. (ms).1', 'Total']],\
+                        experiance_df[['Total RTT','Total TCP Retrans', 'Total Throughput']],\
+                       on='MSISDN/Number')
+  regretion_df = pd.merge(regretion_df,satisfaction_df['satisfaction score'], on='MSISDN/Number' )
+  st.write(regretion_df.head())
+  X = regretion_df[['Bearer Id', 'Dur. (ms).1', 'Total','Total RTT','Total TCP Retrans', 'Total Throughput']].values
+  X = StandardScaler().fit_transform(X)
+  X.shape
+  y = regretion_df[['satisfaction score']].values
+  y = StandardScaler().fit_transform(y)
+  y.shape
+  model = LinearRegression().fit(X, y)
+  st.write(model.score(X, y))
+  
 
