@@ -3,11 +3,11 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 # pages
-#import pages.home as home
-#import pages.marketing as marketing
-#import pages.engagement as enngagement
-#import pages.experience as experience
-#import pages.satisfaction as satisfaction
+import pages.home as home
+import pages.marketing as marketing
+import pages.engagement as enngagement
+import pages.experience as experience
+import pages.satisfaction as satisfaction
 
 st.set_page_config(page_title="TellCo Data Analysis", layout="wide")
 st.title("TelCo Data analysis")
