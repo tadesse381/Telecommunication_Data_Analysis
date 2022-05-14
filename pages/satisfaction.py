@@ -11,6 +11,7 @@ from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 def run_satisfaction():
+  st.write("## Satisfaction Analysis")
   file_name = 'data/clean_telecommunication_data.csv'
   data = pd.read_csv(file_name)
   #Aggregate per user the following information in the column
@@ -129,5 +130,10 @@ def run_satisfaction():
   y.shape
   model = LinearRegression().fit(X, y)
   st.write(model.score(X, y))
+  st.write("## Satisfaction Analysis")
+  st.write("Most of the user Telcco is more engaged and experienced on using the services.\
+Thus, this shows that the user is satisfied by the Telcco service. \
+The prediction of the developed model on the user satisfaction\
+shows about 83.2% of the user is satisfied")
   
 
