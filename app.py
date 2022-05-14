@@ -26,7 +26,7 @@ elif(page == 'Marketing'):
 elif(page == 'Engagement'):
   enngagement.run_engagement()
 elif(page == 'Experience'):
-  experiance.run_experiance()
+  experience.run_experience()
 elif(page == 'Satisfaction'):
   satisfaction.run_satisfaction()
 else:
