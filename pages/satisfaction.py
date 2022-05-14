@@ -42,5 +42,15 @@ def run_satisfaction():
     new_df['experience score'] = ((df['Total RTT'] - x)**2 + (df['Total TCP Retrans'] - y)**2 \
                               + (df['Total Throughput'] - z)**2 )**0.5
     return new_df
+  ## First normalize the Data, Then Cluster
+  min_max_scaler = preprocessing.MinMaxScaler()
+  network_values = net_cluster_df.values
+  scalled_values = min_max_scaler.fit_transform(network_values)
+  df_network_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
+  cluster = kmeans.predict(df_network_normalized)
+  experiance_df = network_per_user_df.copy()
+  experiance_df['cluster-experiance']  = cluster
+  experiance_df = experiance_df.set_index('MSISDN/Number')
+  kmeans = KMeans(n_clusters=3).fit(df_normalized)
   experiance_scored_df = get_experiance_score(experiance_df, lowest_experiance)
   st.write(experiance_scored_df.head())
