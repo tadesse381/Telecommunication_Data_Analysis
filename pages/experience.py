@@ -62,7 +62,7 @@ def run_experiance():
   net_cluster_df.drop('Handset Type', axis=1, inplace=True)
   net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
   st.write(net_cluster_df.head())
-  st.write("Experience Analytics Results")
+  st.write("## Experience Analytics Results")
   st.write("It is figured out on graph d) Huawei has high TCP Retrans and Apple is the second one.\
 While the total throughput of iApple handset is greater by 21kb when it is compared with Huawei.\
 In addition to this the average TCP trans of Apple is about 60,460 kbps and average TCP trans of Apple is about 16,996.00 kbps.\
