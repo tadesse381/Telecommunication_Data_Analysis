@@ -111,3 +111,8 @@ def run_satisfaction():
     return new_df
   experiance_scored_df = get_experiance_score(experiance_df, lowest_experiance)
   st.write(experiance_scored_df.head())
+  ##Task 4.2 - Consider the average of both engagement & experience scores as the satisfaction score & report the top 10 satisfied customer
+  satisfaction_df = pd.merge(engagement_scored_df["engagement score"], experiance_scored_df['experience score'], on='MSISDN/Number')
+  satisfaction_df['satisfaction score'] = (satisfaction_df['engagement score'] + satisfaction_df['experience score']) / 2
+  st.write(satisfaction_df.sort_values(by='satisfaction score', ascending=False).head(5))
+
