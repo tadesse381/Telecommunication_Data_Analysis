@@ -32,7 +32,7 @@ def run_satisfaction():
   #Read the cleaned csv file and store it on data
   file_name = 'data/clean_telecommunication_data.csv'
   data = pd.read_csv(file_name)
-  df_task_3 = file.read_csv(file_name)
+  df_task_3 = pd.read_csv(file_name)
   new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
                          'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
