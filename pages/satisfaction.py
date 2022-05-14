@@ -34,6 +34,22 @@ def run_satisfaction():
   ## Engagement Score
   lowest_engagement = engagement_df.groupby('cluster-engagement').get_group(0).mean()
   st.write(lowest_engagement)
+  file_name = 'data/Week1_challenge_data_source.csv'
+  df_task_3 = pd.read_csv(file_name)
+  new_netwok_df = df_task_3[['MSISDN/Number', 'Handset Type','TCP DL Retrans. Vol (Bytes)', 'TCP UL Retrans. Vol (Bytes)',\
+                         'Avg RTT DL (ms)', 'Avg RTT UL (ms)',\
+                         'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
+  null_percentage(new_netwok_df)
+  new_netwok_df.isnull().sum()
+  ## Fill Mising Values
+  for col in new_netwok_df.columns:
+    if(new_netwok_df[col].isnull().sum()):
+      new_netwok_df[col] = new_netwok_df[col].fillna(new_netwok_df[col].mode()[0])
+  new_netwok_df['Total TCP Retrans'] = new_netwok_df['TCP DL Retrans. Vol (Bytes)'] +\
+                                       new_netwok_df['TCP UL Retrans. Vol (Bytes)']
+  new_netwok_df['Total Throughput'] = new_netwok_df['Avg Bearer TP DL (kbps)'] +\
+                                      new_netwok_df['Avg Bearer TP DL (kbps)']
+  new_netwok_df['Total RTT'] = new_netwok_df['Avg RTT DL (ms)'] + new_netwok_df['Avg RTT UL (ms)']
   handset= network_per_user_df['Handset Type'].unique()
   net_cluster_df = network_per_user_df.copy()
   net_cluster_df.drop('Handset Type', axis=1, inplace=True)
