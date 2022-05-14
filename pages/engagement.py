@@ -124,16 +124,17 @@ def run_engagement():
   #st.ploting.hist(user_df, 'Total Google', 'green')
   correlation = user_df.corr()
   plot_heatmap(correlation, 'Correlation B/n  Applications')
-  st.write("### Relation Ship Per applicaton")
   st.write("## Univariant")
   univriant(user_df)
   st.write("## Bivariant")
   bivariant(user_df)
 
-
-  st.write("App per Engagement ")
   app_engagement(user_df)
 
-  st.write("## From The graph we can see Users are Engaged on Gaming, Other ,Youtube and Netflix more than other applications")
-  st.write("So The We should give more focus on Gaming Than other apps")
+  st.write("## Engagment Analysis Result")
+  
   st.pyplot()
+  st.write("As it is indicated on graph c) the users are more engaged on Game. \
+To the Maximum 4,518,036 bytes of data volume is used for the gaming purpose.\
+The Correlation of the application are positive, that mean when the usage of the gaming increase the probability of using the other application also increase.\
+This shows that company is profitable in future time. Therefore, the company should emphasis on gaming application.")
