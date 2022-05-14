@@ -29,6 +29,13 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  handset= network_per_user_df['Handset Type'].unique()
+  # catagory = {}
+  # for index, each in enumerate(handset.tolist()):
+  #     catagory[each] = index
+  net_cluster_df = network_per_user_df.copy()
+  net_cluster_df.drop('Handset Type', axis=1, inplace=True)
+  net_cluster_df = net_cluster_df.set_index('MSISDN/Number')
    ## First normalize the Data, Then Cluster
   min_max_scaler = preprocessing.MinMaxScaler()
   network_values = net_cluster_df.values
