@@ -20,4 +20,10 @@ def run_experiance():
                          'Avg Bearer TP DL (kbps)', 'Avg Bearer TP UL (kbps)']]
   null_percentage(new_netwok_df)
   new_netwok_df.isnull().sum()
+  ## Fill Mising Values
+  for col in new_netwok_df.columns:
+    if(new_netwok_df[col].isnull().sum()):
+      new_netwok_df[col] = new_netwok_df[col].fillna(new_netwok_df[col].mode()[0])
+  null_percentage(new_netwok_df)
+  new_netwok_df.isnull().sum()
   
