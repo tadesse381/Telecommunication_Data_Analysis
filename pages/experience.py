@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import scripts.ploting as plot
 from scripts import file
 def null_percentage(df):
     number_of_rows, number_of_columns = df.shape
@@ -36,4 +37,8 @@ def run_experiance():
   columns = ['MSISDN/Number','Bearer Id','Handset Type', 'Total TCP Retrans', 'Total Throughput', 'Total RTT']
   network_per_user_df = new_netwok_df.groupby('MSISDN/Number').agg(aggregate).reset_index()
   st.write(network_per_user_df.head())
+  # top 5
+  result = network_per_user_df.sort_values(by='Total TCP Retrans', ascending=False)[:100]
+  plot_bar(result, result['Handset Type'], result['Total TCP Retrans'], 'Highest Total TCP Retrans Handsets','','')
+  st.pyplot()
   
