@@ -11,6 +11,16 @@ def null_percentage(df):
     null_size = (df.isnull().sum()).sum()
     percentage = round((null_size / df_size) * 100, 2)
     st.write("Data Fraame contain null values of:",percentage)
+def plot_bar(df:pd.DataFrame, x_col:str, y_col:str, title:str, xlabel:str, ylabel:str)->None:
+  plt.figure(figsize=(12, 7))
+  sns.barplot(data = df, x=x_col, y=y_col)
+  plt.title(title, size=20)
+  plt.xticks(rotation=75, fontsize=14)
+  plt.yticks( fontsize=14)
+  plt.xlabel(xlabel, fontsize=16)
+  plt.ylabel(ylabel, fontsize=16)
+  plt.show()
+  st.pyplot()
 def run_experiance():
   #Read the csv file
   st.write("## User Experiance Analysis")
@@ -40,5 +50,4 @@ def run_experiance():
   # top 5
   result = network_per_user_df.sort_values(by='Total TCP Retrans', ascending=False)[:100]
   plot_bar(result, result['Handset Type'], result['Total TCP Retrans'], 'Highest Total TCP Retrans Handsets','','')
-  st.pyplot()
-  
+ 
