@@ -29,6 +29,12 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+   ## First normalize the Data, Then Cluster
+  min_max_scaler = preprocessing.MinMaxScaler()
+  network_values = net_cluster_df.values
+  scalled_values = min_max_scaler.fit_transform(network_values)
+  df_network_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
+  kmeans = KMeans(n_clusters=3).fit(df_normalized)
   cluster = kmeans.predict(df_network_normalized)
   experiance_df = network_per_user_df.copy()
   experiance_df['cluster-experiance']  = cluster
@@ -42,12 +48,6 @@ def run_satisfaction():
   cluster_0 = cluster_group_df.get_group(0)
   cluster_1 = cluster_group_df.get_group(1)
   cluster_2 = cluster_group_df.get_group(2)
-  ## First normalize the Data, Then Cluster
-  min_max_scaler = preprocessing.MinMaxScaler()
-  network_values = net_cluster_df.values
-  scalled_values = min_max_scaler.fit_transform(network_values)
-  df_network_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
-  kmeans = KMeans(n_clusters=3).fit(df_normalized)
   ## Engagement Score
   lowest_engagement = engagement_df.groupby('cluster-engagement').get_group(0).mean()
   st.write(lowest_engagement)
