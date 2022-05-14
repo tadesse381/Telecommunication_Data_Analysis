@@ -11,6 +11,35 @@ from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 def run_satisfaction():
+  file_name = 'data/clean_telecommunication_data.csv'
+  data = pd.read_csv(file_name)
+  #Aggregate per user the following information in the column
+  df_clean = data.copy()
+  aggregate = {"Bearer Id": 'count', 'Dur. (ms).1':'sum', 'Total UL (Bytes)': 'sum', 'Total DL (Bytes)': 'sum'}
+  aggregation_result = df_clean.groupby('MSISDN/Number').agg(aggregate)
+  aggregation_result.head()
+  #Aggregate the above metrics per customer id (MSISDN) and report the top 10 customers per engagement metric
+  df_task2 = df_clean.copy()
+  df_task2['Total'] = df_task2['Total UL (Bytes)'] + df_task2['Total DL (Bytes)']
+  df_task2 = df_task2.groupby('MSISDN/Number')\
+    .agg({"Bearer Id": "count", 'Dur. (ms).1':'sum', 'Total':'sum'})
+  #Compute the minimum, maximum, average & total non- normalized metrics for each cluster.
+  cluster = kmeans.predict(df_normalized)
+  engagement_df = df_task2.copy()
+  engagement_df['cluster-engagement']  = cluster
+  cluster_group_df = engagement_df.groupby('cluster-engagement')
+  cluster_0 = cluster_group_df.get_group(0)
+  cluster_1 = cluster_group_df.get_group(1)
+  cluster_2 = cluster_group_df.get_group(2)
   ## Engagement Score
   lowest_engagement = engagement_df.groupby('cluster-engagement').get_group(0).mean()
   st.write(lowest_engagement)
+  def get_engagement_score(df, lowest):
+    x = float(lowest['Bearer Id'])
+    y = float(lowest['Dur. (ms).1'])
+    z = float(lowest['Total'])
+    new_df = df.copy()
+    new_df['engagement score'] = ((df['Bearer Id'] - x)**2 + (df['Dur. (ms).1'] - y)**2 + (df['Total'] - z)**2)**0.5
+    return new_df
+  engagement_scored_df = get_engagement_score(engagement_df, lowest_engagement)
+  st.write(engagement_scored_df.head())
