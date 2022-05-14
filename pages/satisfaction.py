@@ -29,6 +29,13 @@ def run_satisfaction():
   scalled_values = min_max_scaler.fit_transform(df_values)
   df_normalized = pd.DataFrame(data=scalled_values, columns=df_task2.columns)
   kmeans = KMeans(n_clusters=3).fit(df_normalized)
+  def null_percentage(df):
+    number_of_rows, number_of_columns = df.shape
+    df_size = number_of_rows * number_of_columns
+    
+    null_size = (df.isnull().sum()).sum()
+    percentage = round((null_size / df_size) * 100, 2)
+    return percentage
   #Read the cleaned csv file and store it on data
   file_name = 'data/Week1_challenge_data_source.csv'
   data = pd.read_csv(file_name)
