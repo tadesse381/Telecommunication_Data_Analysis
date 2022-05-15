@@ -5,4 +5,6 @@ This project is performed to analyse whether Tellco is worth buying and selling.
 To perform the project the data extracted from a month of aggregated data on xDR is used
 In this work, data cleaning, transforming, exploration and analysis tasks are performed.
 Finally, user overview, engagement, experience and satisfaction analytics is done and the Telcco productivity is predicted
-
+## Conclusion
+In this project Telcco data is analysed using the best data engineering practice.The analysis is not made on location of the user.The insights extracted about market analysis, user engagement, experience and satisfaction is very promising that Telcco is best buying and selling company.
+Therefore, I strongly recommend the investor to buy the Telcco.
