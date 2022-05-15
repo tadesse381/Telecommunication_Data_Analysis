@@ -1,12 +1,6 @@
 # Telecommunication_Data_Analysis
 Understanding user generated telecommunication data provided and extracting insights that helps to understand the performance of the company.
 ## Contents
-Introduction
-User Overview or Market Analysis
-User Engagement analysis
-Experience Analytics
-Satisfaction Analysis
-Conclusion and Recommendation
 - [Introduction](#Introduction)
 -[User Overview or Market Analysis](## User Overview or Market Analysis)
 - [User Engagement analysis](## User Engagement analysis)
