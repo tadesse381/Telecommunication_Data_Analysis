@@ -2,11 +2,11 @@
 Understanding user generated telecommunication data provided and extracting insights that helps to understand the performance of the company.
 ## Contents
 - [Introduction](#Introduction)
--[User Overview or Market Analysis](#UserOvervieworMarketAnalysis)
--[User Engagement analysis](#UserEngagementanalysis)
--[Experience Analytics](#ExperienceAnalytics)
-- [Satisfaction Analysis](#SatisfactionAnalysis)
-- [Conclusion and Recommendation](#Conclusion)
+- [User Overview or Market Analysis](#UserOvervieworMarketAnalysis)
+- -[User Engagement analysis](#UserEngagementanalysis)
+- -[Experience Analytics](#ExperienceAnalytics)
+- - [Satisfaction Analysis](#SatisfactionAnalysis)
+- - [Conclusion and Recommendation](#Conclusion)
 ## Introduction
 This project is performed to analyse whether Tellco is worth buying and selling. To perform the project the data extracted from a month of aggregated data on xDR is used In this work, data cleaning, transforming, exploration and analysis tasks are performed. Finally, user overview, engagement, experience and satisfaction analytics is done and the Telcco productivity is predicted.Data contain 150001 rows and  55 columns, and null values of 12.72%.Tasks such as null percentage checking, data cleaning, data distribution(skewness) and removing rows with small null values, and filling object columns with mode is performed. 1,495  null rows and 11 null columns are removed, and data reduced to 148506 rows & 44 columns.Null percentage after data cleaning is 0.0%.
 ## User Overview or Market Analysis
