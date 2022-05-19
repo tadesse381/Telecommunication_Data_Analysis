@@ -10,6 +10,7 @@ from sklearn import preprocessing
 from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
+#User Statisfaction Analysis
 def run_satisfaction():
   st.write("## Satisfaction Analysis")
   file_name = 'data/clean_telecommunication_data.csv'
